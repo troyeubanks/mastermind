@@ -8,7 +8,8 @@ module Mastermind
 
 		def play
 			loop do
-				player_guess(@guess)
+				player_guess
+				puts @guess
 
 				if player_won?(@guess, @code)
 					puts "Player guessed code: #{@code}!"
@@ -22,7 +23,8 @@ module Mastermind
 		end
 
 		def generate_code
-			(rand * 6666).to_i
+			#(rand * 6666).to_i
+			1234 #used for testing
 		end
 
 		def player_won?(guess, code)
@@ -35,9 +37,19 @@ module Mastermind
 			false
 		end
 
-		def player_guess; end
+		def player_guess
+			puts "Please enter a four-digit guess: "
+			begin
+				n = Integer(gets)
+			rescue ArgumentError
+				puts "Please enter a number"
+			end
+			set_guess(n)
+		end
 
-
+		def set_guess(guess)
+			@guess = guess
+		end
 
 	end
 end
