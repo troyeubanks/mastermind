@@ -40,16 +40,32 @@ module Mastermind
 		def player_guess
 			puts "Please enter a four-digit guess: "
 			begin
-				n = Integer(gets)
+				input = Integer(gets)
 			rescue ArgumentError
 				puts "Please enter a number"
 			end
-			set_guess(n)
+			set_guess(input)
 		end
 
 		def set_guess(guess)
 			@guess = guess
 		end
+
+		def parse_input(input)
+
+		end
+
+		def get_state(input, code)
+			counter = 0
+			code_arr = code.to_s.split('')
+			result = Array.new(4)
+			input.to_s.split('').each do |i|
+				result[counter] = "O" if code_arr[counter] == i
+				result[counter] ||= "*" if code_arr.include?(i)
+				result[counter] ||= "x"
+				counter += 1
+			end
+		end			
 
 	end
 end
